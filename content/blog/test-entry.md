@@ -10,9 +10,9 @@ categories:
   - blog
   - test
   
-____nice_ 
+____
 
-# testing markdowns rendering
+# Testing Markdown's Rendering
 
 ok, here's a paragraph
 

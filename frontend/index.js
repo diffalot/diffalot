@@ -1,21 +1,27 @@
-
 import 'babel-polyfill'
 
 var html = require('choo/html')
+var raw = require('choo/html/raw')
 var choo = require('choo')
+
+import defaultView from './views/default'
 
 var app = choo()
 
 app.route('/', function (state, emit) {
-  return html`<html>
-<head>
-  <link rel="stylesheet" href="/assets/bundle.css" />
-  <script src="/assets/bundle.js"></script>
-</head>
-<body>
-  <div>Hello ${state.name}</div>
-  </body>
-</html>`
+  const stateString = JSON.stringify({initial: state})
+  return defaultView(state, emit)(html`home content`)
+})
+
+app.route('/:link', (state, emit) => {
+  const renderedMarkdown = state.content.filter(post => {
+    return (post.path === state.href)
+  })[0].html
+  console.log({
+    content: state.content,
+    renderedMarkdown
+  })
+  return defaultView(state, emit)(raw(renderedMarkdown))
 })
 
 var defaultState = { name: 'Node' }

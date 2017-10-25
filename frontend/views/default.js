@@ -10,7 +10,9 @@ export default (state, emit) => children => {
   <script src="/assets/bundle.js"></script>
 </head>
 <body>
-  <ul>${state.content.map( resource => {
+  <ul>
+    <li><a href="/">Home</a></li>
+    ${state.content.map( resource => {
     return html`<li><a href="${resource.path}">${resource.title}</a></li>`
   })}</ul>
   <div class="container">${children}</div>

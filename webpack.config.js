@@ -1,6 +1,4 @@
-import autoprefixer from 'autoprefixer'
 import webpack from 'webpack'
-import ExtractTextPlugin from 'extract-text-webpack-plugin'
 
 export default {
   entry: './frontend/index.js',
@@ -13,14 +11,13 @@ export default {
         test: /\.js$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader',
+          loader: 'babel-loader'
         }
       }
     ]
   },
   plugins: [
-    //new webpack.HotModuleReplacementPlugin(),
-    new ExtractTextPlugin('bundle.css', { allChunks: true }),
-    //new webpack.NoErrorsPlugin()
-  ],
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin()
+  ]
 }

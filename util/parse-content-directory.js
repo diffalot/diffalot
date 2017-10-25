@@ -8,7 +8,7 @@ import marked from 'marked'
 const parseMarkdown = content => marked(content)
 
 const formatTitle = title => {
-  return title.toLowerCase().replace(/\ /g, '_')
+  return title.toLowerCase().replace(/ /g, '_')
 }
 
 const createPath = meta => {

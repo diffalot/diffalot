@@ -1,12 +1,12 @@
 {
   "//1": "describes your app and its dependencies",
   "//2": "https://docs.npmjs.com/files/package.json",
-  "//3": "updating this file will download and update your packages",
   "name": "diff.mx",
   "version": "0.0.1",
   "description": "What I am about",
   "main": "index.js",
   "scripts": {
+    "lint": "eslint frontend server util content",
     "start": "node index.js"
   },
   "dependencies": {
@@ -44,5 +44,13 @@
     "node",
     "glitch",
     "express"
-  ]
+  ],
+  "devDependencies": {
+    "eslint": "^4.9.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-node": "^5.2.1",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-standard": "^3.0.1"
+  }
 }

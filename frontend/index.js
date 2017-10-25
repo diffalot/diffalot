@@ -1,15 +1,13 @@
 import 'babel-polyfill'
-
-var html = require('choo/html')
-var raw = require('choo/html/raw')
-var choo = require('choo')
+import choo from 'choo'
+import html from 'choo/html'
+import raw from 'choo/html/raw'
 
 import defaultView from './views/default'
 
 var app = choo()
 
 app.route('/', function (state, emit) {
-  const stateString = JSON.stringify({initial: state})
   return defaultView(state, emit)(html`home content`)
 })
 

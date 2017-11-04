@@ -1,3 +1,4 @@
+```yamlmeta
 published: false
 
 date: 2013-04-22
@@ -12,8 +13,7 @@ tags:
   - eme
   - html5
   - webrtc
-
-____
+```
 
 > UPDATE:  i have been confused by multiple uses of CDM { Content Delivery
 > Manager | Content Decryption Module } on w3c lists.  please substitute “CDM”

@@ -1,6 +1,6 @@
 import 'babel-polyfill'
 
-var html = require('choo/html')
+import html from 'choo/html'
 var raw = require('choo/html/raw')
 var choo = require('choo')
 
@@ -17,10 +17,6 @@ app.route('/:link', (state, emit) => {
   const renderedMarkdown = state.content.filter(post => {
     return (post.path === state.href)
   })[0].html
-  console.log({
-    content: state.content,
-    renderedMarkdown
-  })
   return defaultView(state, emit)(raw(renderedMarkdown))
 })
 

@@ -43,7 +43,8 @@ app.get('*', async (request, response) => {
   await contentParser
   
   const state = {
-    name: 'World',
+    siteName: `diffalot`,
+    siteTitleSeparator: `::`,
     content: getContent()
       .map(resource => {
         return {

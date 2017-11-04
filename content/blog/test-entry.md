@@ -1,3 +1,4 @@
+```yamlmeta
 published: false
 
 date: 2017-10-24
@@ -9,8 +10,7 @@ title: Working on a new personal site
 categories:
   - blog
   - test
-  
-____
+```
 
 # Testing Markdown's Rendering
 
@@ -21,6 +21,8 @@ ok, here's a paragraph
   * sub list
   * sub item
 * an item
+
+## Here's some JavaScript
 
 ```javascript
 const word = 'value'

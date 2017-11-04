@@ -3,9 +3,13 @@ import path from 'path'
 import filewalker from 'filewalker'
 import yaml from 'js-yaml'
 import moment from 'moment'
-import marked from 'marked'
+import Remarkable from 'remarkable'
 
-const parseMarkdown = content => marked(content)
+const markup = new Remarkable()
+const parseMarkdown = content => {
+  console.log({markup})
+  return markup.render(content)
+}
 
 const formatTitle = title => {
   return title.toLowerCase().replace(/\ /g, '_')
@@ -24,13 +28,13 @@ const parseMeta = meta => {
   }
 }
 
-const extractMeta = yamlString => parseMeta(yaml.safeLoad(yamlString))
+const extractMeta = yamlString => 'meta' //parseMeta(yaml.safeLoad(yamlString))
 
 const parseFile = pathLocation => {
   const contentEntry = fs.readFileSync(pathLocation)
   const resource = {
-    meta: extractMeta(contentEntry.toString().split('____')[0]),
-    html: parseMarkdown(contentEntry.toString().split('____')[1])
+    meta: extractMeta(contentEntry.toString()),
+    html: parseMarkdown(contentEntry.toString())
   }
   return resource
 }

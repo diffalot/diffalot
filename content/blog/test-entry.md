@@ -1,4 +1,4 @@
-```yamlmeta
+---
 published: false
 
 date: 2017-10-24
@@ -10,7 +10,7 @@ title: Working on a new personal site
 categories:
   - blog
   - test
-```
+---
 
 # Testing Markdown's Rendering
 

@@ -9,5 +9,5 @@ export default file => {
            .process(fileBuffer)
            .then(result => {
              return result.css
-           }) 
+           })
 }

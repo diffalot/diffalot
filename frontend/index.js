@@ -6,7 +6,7 @@ var choo = require('choo')
 
 import defaultView from './views/default'
 
-var app = choo()
+var app = choo();
 
 app.route('/', function (state, emit) {
   const stateString = JSON.stringify({initial: state})

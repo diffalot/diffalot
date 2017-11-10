@@ -6,26 +6,23 @@ import express from 'express'
 import webpack from 'webpack'
 import webpackMiddleware from 'webpack-dev-middleware'
 
-
 import { chooRender } from '../frontend'
 import postcssTranspiler from './postcss-transpiler'
 import webpackConfig from '../webpack.config'
 import parseContent from '../util/parse-content-directory'
 
-const app = express();
+const app = express()
 
 let content
 const contentParser = parseContent('./content')
 .then(newContent => {
   content = newContent
   console.log('content parsing finished', {content})
-  app.get
 })
 
 const getContent = () => {
   return content
 }
-
 
 app.get('/favicon.ico', (req, res) => res.redirect('https://cdn.glitch.com/06e10747-4302-48f0-8176-85bde15251a6%2Ffavicon.ico?1508886324988'))
 
@@ -39,9 +36,9 @@ app.use(webpackMiddleware(webpack(webpackConfig), {
 }))
 
 app.get('*', async (request, response) => {
-  // lookup state
   await contentParser
-  
+
+  // lookup state
   const state = {
     siteName: `diffalot`,
     siteTitleSeparator: `::`,
@@ -61,8 +58,7 @@ app.get('*', async (request, response) => {
 
 // listen for requests :)
 contentParser.then(() => {
-var listener = app.listen(process.env.PORT, function () {
-  console.log('Now listening on port ' + listener.address().port);
-});
-  
+  var listener = app.listen(process.env.PORT || 3000, function () {
+    console.log('Now listening on port ' + listener.address().port)
+  })
 })

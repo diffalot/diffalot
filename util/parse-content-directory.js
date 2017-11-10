@@ -1,61 +1,35 @@
 import fs from 'fs'
 import path from 'path'
 import filewalker from 'filewalker'
-import yaml from 'js-yaml'
 import moment from 'moment'
-import Remarkable from 'remarkable'
 
-const markup = new Remarkable()
-const parseMarkdown = content => {
-  console.log({markup})
-  return markup.render(content)
-}
+import parseMarkdown from '../util/parse-markdown'
 
-const formatTitle = title => {
-  return title.toLowerCase().replace(/\ /g, '_')
-}
-
-const createPath = meta => {
-  return `${moment(meta.date).format('/YYYY/')}${formatTitle(meta.title)}`
-}
-
-const parseMeta = meta => {
-  return {
-    title: meta.title,
-    published: meta.published,
-    path: createPath(meta),
-    permalink: meta.permalink
-  }
-}
-
-const extractMeta = yamlString => 'meta' //parseMeta(yaml.safeLoad(yamlString))
-
-const parseFile = pathLocation => {
+const parseFile = async pathLocation => {
   const contentEntry = fs.readFileSync(pathLocation)
-  const resource = {
-    meta: extractMeta(contentEntry.toString()),
-    html: parseMarkdown(contentEntry.toString())
-  }
+  const resource = await parseMarkdown(contentEntry.toString('utf-8'))
   return resource
 }
 
-const parsePath = content => directory => file => {
+const parsePath = content => directory => async file => {
   const pathLocation = path.join(directory, file)
   const parsedPath = path.parse(pathLocation)
   if (parsedPath.ext === '.md') {
-    content.push(parseFile(pathLocation))
+    const content = await parseFile(pathLocation)
+    console.log({content})
+    return content
   }
-  return content
 }
 
 export default directory => {
-  console.log('parsing content in ', {directory})
   return new Promise((resolve, reject) => {
     const content = []
     filewalker(directory)
       .on('file', async file => {
-        console.log('found file', {file})
-        parsePath(content)(directory)(file)
+        console.log('filedata')
+        let fileData = await parsePath(content)(directory)(file)
+        console.log(fileData)
+        content.push(fileData)
       })
       .on('done', () => {
         resolve(content)
